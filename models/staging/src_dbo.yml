@@ -1,0 +1,120 @@
+version: 2
+
+sources:
+    - name: dbo
+      description: this data comes is directly ingested by ADF and can technically be considered raw
+                    since the majority of the transformations are realized in dbt
+      database: GourmandDWH
+      tables:
+        - name: Business
+          description: ...
+          columns:
+            - name: BusinessID
+              description: The unique key for our snapshot model (SCD2)
+              tests:
+                - unique
+          
+        - name: BusinessCategory
+          description: ...
+          columns:
+            - name: CategoryID
+              description: The unique key for our snapshot model (SCD2)
+              tests:
+                - unique
+          
+        - name: BusinessCategoryBridge
+          description: ...
+          columns:
+            - name: SnapshotCompKey
+              description: The unique key for our snapshot model (SCD2) It's created by through the following
+                            concat([BusinessID],'-',[CategoryID]) as a computed column
+              tests:
+                - unique
+            - name: BusinessID
+              tests:
+                - not_null
+            - name: CategoryID
+              tests:
+                  - not_null
+          
+        - name: BusinessHolding
+          description: ...
+          
+        - name: BusinessTransactionBridge
+          description: ...
+          columns:
+            - name: SnapshotCompKey
+              description: The unique key for our snapshot model (SCD2). It's created by through the following
+                            concat([BusinessID],'-',[TransactionID]) as a computed column
+              tests:
+                - unique
+            - name: BusinessID
+              tests:
+                - not_null
+            - name: TransactionID
+              tests:
+                  - not_null
+
+          
+        - name: City
+          description: ...
+          
+        - name: Country
+          description: ...
+          
+        - name: County
+          description: ...
+          
+        - name: CountyGrowth
+          description: ...
+          columns:
+            - name: IncrementalCompKey
+              description: The unique key for our incremental model
+              tests:
+                - unique
+          
+        - name: Event
+          description: ...
+          columns:
+            - name: EventID
+              description: The unique key for our snapshot model (SCD2)
+              tests:
+                - unique
+          
+        - name: EventCategory
+          description: ...
+          
+        - name: PaymentLevel
+          description: ...
+          
+        - name: Review
+          description: ...
+          columns:
+            - name: ReviewID
+              description: The unique key for our snapshot model (SCD2)
+              tests:
+                - unique
+            - name: InsertedAt
+              description: This will function as a LastEditedWhen column
+              tests:
+                - not_null
+        - name: State
+          description: ...
+        - name: TransactionType
+          description: ...
+          columns:
+            - name: TransactionID
+              description: The unique key for our snapshot model (SCD2)
+              tests:
+                - unique
+          
+        - name: User
+          description: ...
+          columns:
+            - name: UserID
+              description: The unique key for our snapshot model (SCD2)
+              tests:
+                - unique
+        - name: dates
+          description: source for date dimension
+          

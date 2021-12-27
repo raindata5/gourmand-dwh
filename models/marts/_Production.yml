@@ -1,0 +1,115 @@
+version: 2
+
+models:
+  - name: FactCountyGrowth  
+    description: incremental model that does not provide funcionality for updating values
+    columns:
+      - name: IncrementalCompKey
+        description: PK for our model created through a computed column and would provide funcionality for updating values
+        tests:
+          - unique
+      - name: CountySourceKey
+        tests:
+          - relationships:
+              to: ref('DimCounty')
+              field: CountySourceKey
+  - name: FactBusinessHolding
+    description: incremental model that does provide funcionality for updating values
+    columns:
+      - name: IncrementalCompKey
+        description: PK for our model created through a computed column and serves to provide funcionality for updating values
+        tests:
+          - unique
+      - name: BusinessKey
+        description: surrogate key for each business instance generated in DWH
+        tests:
+          - relationships:
+              to: ref('DimBusiness')
+              field: BusinessKey
+      - name: BusinessSourceKey
+        description: surrogate key generated in OLTP DB
+        tests:
+          - relationships:
+              to: ref('DimBusiness')
+              field: BusinessKey
+  - name: DimUser
+    description: ...
+    columns:
+      - name: UserKey
+        description: surrogate key for each user instance generated in DWH
+        tests:
+          - unique
+  - name: DimTransactionType
+    description: ...
+    columns:
+      - name: TransactionKey
+        description: surrogate key for each Transaction Type instance generated in DWH
+        tests:
+          - unique
+  - name: DimReview
+    description: ...
+    columns:
+      - name: ReviewKey
+        description: surrogate key for each Review instance generated in DWH
+        tests:
+          - unique
+  - name: DimLocation
+    description: ...
+    columns:
+      - name: CitySourceKey
+        description: surrogate key generated in OLTP DB
+        tests:
+          - unique
+  - name: DimCounty
+    description: ...
+    columns:
+      - name: CountySourceKey
+        description: surrogate key generated in OLTP DB
+        tests:
+          - unique
+  - name: DimEvent
+    description: <***>
+    columns:
+      - name: EventSourceKey
+        description: surrogate key generated in OLTP DB
+        tests:
+          - unique
+  - name: DimDate
+    description: ...
+    columns:
+      - name: TheDate
+        description: The date incremented by one in each row
+        tests:
+          - unique
+  - name: DimBusinessTransactionBridge
+    description: ...
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - BusinessKey
+            - TransactionKey
+  - name: DimBusinessCategoryBridge
+    description: ...
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - BusinessKey
+            - BusinessCategoryKey
+  - name: DimBusinessCategory
+    description: ...
+    columns:
+      - name: BusinessCategoryKey
+        description: surrogate key for each business category instance generated in DWH
+        tests:
+          - unique
+  - name: DimBusiness
+    description: ...
+    columns:
+      - name: BusinessKey
+        description: surrogate key for each Business instance generated in DWH
+        tests:
+          - unique
+
+  
+          
+        
