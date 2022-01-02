@@ -1,12 +1,11 @@
 version: 2
 
 sources:
-    - name: dbo
-      description: this data comes is directly ingested by ADF and can technically be considered raw
-                    since the majority of the transformations are realized in dbt
-      database: GourmandDWH
+    - name: public2
+      description: this data is ingested by through python using the BQ api and can technically be considered
+      # database: GourmandDWH
       tables:
-        - name: Business
+        - name: business
           description: ...
           columns:
             - name: BusinessID
@@ -14,7 +13,7 @@ sources:
               tests:
                 - unique
           
-        - name: BusinessCategory
+        - name: businesscategory
           description: ...
           columns:
             - name: CategoryID
@@ -22,7 +21,7 @@ sources:
               tests:
                 - unique
           
-        - name: BusinessCategoryBridge
+        - name: businesscategorybridge
           description: ...
           columns:
             - name: SnapshotCompKey
@@ -37,10 +36,10 @@ sources:
               tests:
                   - not_null
           
-        - name: BusinessHolding
+        - name: businessholding
           description: ...
           
-        - name: BusinessTransactionBridge
+        - name: businesstransactionbridge
           description: ...
           columns:
             - name: SnapshotCompKey
@@ -56,16 +55,16 @@ sources:
                   - not_null
 
           
-        - name: City
+        - name: city
           description: ...
           
-        - name: Country
+        - name: country
           description: ...
           
-        - name: County
+        - name: county
           description: ...
           
-        - name: CountyGrowth
+        - name: countygrowth
           description: ...
           columns:
             - name: IncrementalCompKey
@@ -73,7 +72,7 @@ sources:
               tests:
                 - unique
           
-        - name: Event
+        - name: event
           description: ...
           columns:
             - name: EventID
@@ -81,13 +80,13 @@ sources:
               tests:
                 - unique
           
-        - name: EventCategory
+        - name: eventcategory
           description: ...
           
-        - name: PaymentLevel
+        - name: paymentlevel
           description: ...
           
-        - name: Review
+        - name: review
           description: ...
           columns:
             - name: ReviewID
@@ -98,9 +97,9 @@ sources:
               description: This will function as a LastEditedWhen column
               tests:
                 - not_null
-        - name: State
+        - name: state
           description: ...
-        - name: TransactionType
+        - name: transactiontype
           description: ...
           columns:
             - name: TransactionID
@@ -108,13 +107,13 @@ sources:
               tests:
                 - unique
           
-        - name: User
+        - name: user
           description: ...
           columns:
             - name: UserID
               description: The unique key for our snapshot model (SCD2)
               tests:
                 - unique
-        - name: dates
+        - name: dimdate
           description: source for date dimension
           

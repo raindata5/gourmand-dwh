@@ -7,11 +7,11 @@ with bdg1 as (
         sbdg.CategoryID,
         dbt_valid_from ValidFrom,
         CASE 
-        WHEN dbt_valid_to is NULL THEN CAST('9999-12-31' as DATETIME)
+        WHEN dbt_valid_to is NULL THEN CAST('9999-12-31' as TIMESTAMP)
         ELSE dbt_valid_to
         END AS ValidTo,
         CASE 
-        WHEN dbt_valid_to = CAST('9999-12-31' as DATETIME) THEN 1
+        WHEN dbt_valid_to = CAST('9999-12-31' as TIMESTAMP) THEN 1
         ELSE 0
         END AS is_current
 

@@ -8,7 +8,7 @@ with b_cat_bridge as (
         sbdg.dbt_scd_id,
         sbdg.dbt_updated_at,
         sbdg.dbt_valid_from,
-        COALESCE(sbdg.dbt_valid_to, CAST('9999-12-31' as DATETIME)) as dbt_valid_to
+        COALESCE(sbdg.dbt_valid_to, CAST('9999-12-31' as TIMESTAMP)) as dbt_valid_to
     FROM {{ ref("snap_businesscategorybridge") }} sbdg
 )
 select *

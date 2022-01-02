@@ -80,5 +80,5 @@ select
 from de
 {% if is_incremental() %}
 
-where LastEditedWhen >= (select coalesce(max(LastEditedWhen),cast('1998-11-12' as date)) from {{ this }})
+where LastEditedWhen > (select coalesce(max(LastEditedWhen),cast('1998-11-12' as TIMESTAMP)) from {{ this }})
 {% endif %}

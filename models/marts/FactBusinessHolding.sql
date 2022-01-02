@@ -21,9 +21,10 @@ with bh1 as (
         bh.ReviewCount,
         bh.CloseDate,
         bh.IncrementalCompKey
-FROM {{ source("dbo", "BusinessHolding") }} bh
+FROM {{ source("public2", "businessholding") }} bh
 INNER JOIN {{ ref("DimBusiness") }} db on bh.BusinessID=db.BusinessSourceKey
-WHERE bh.CloseDate BETWEEN cast(db.ValidFrom as DATE) and cast(db.ValidTo as DATE)
+-- WHERE bh.CloseDate BETWEEN cast(db.ValidFrom as DATE) and cast(db.ValidTo as DATE)
+WHERE bh.CloseDate >= cast(db.ValidFrom as DATE) and bh.CloseDate < cast(db.ValidTo as DATE)
 )
 
 -- dbt run --full-refresh --select my_incremental_model+

@@ -8,7 +8,7 @@ with bus_cat as (
         LastNameInitial,
         dbt_valid_from ValidFrom,
         CASE 
-        WHEN dbt_valid_to is NULL THEN CAST('9999-12-31' as DATETIME)
+        WHEN dbt_valid_to is NULL THEN CAST('9999-12-31' as TIMESTAMP)
         ELSE dbt_valid_to
         END AS ValidTo,
         CASE 

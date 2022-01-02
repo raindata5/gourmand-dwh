@@ -1,6 +1,6 @@
 with finaldates as (
     select 
     * 
-    FROM {{ref("dimdate")}}
+    FROM {{ref("dimdates")}}
 )
 select * FROM finaldates

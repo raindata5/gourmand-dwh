@@ -16,7 +16,7 @@ with
             c.EstimatedPopulation,
             c.LastEditedWhen,
             c.IncrementalCompKey
-        from {{ source("dbo", "CountyGrowth") }} c
+        from {{ source("public2", "countygrowth") }} c
 
 {% if is_incremental() %}
 

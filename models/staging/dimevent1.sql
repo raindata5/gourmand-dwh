@@ -1,7 +1,7 @@
 with events as (
     select 
         *
-    from {{ source("dbo", "Event") }}
+    from {{ source("public2", "event") }}
 )
 
 select * from events

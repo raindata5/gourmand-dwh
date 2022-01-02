@@ -24,7 +24,7 @@ with reviews as (
         db1.BusinessKey,
         dbt_valid_from ValidFrom,
         CASE 
-        WHEN dbt_valid_to is NULL THEN CAST('9999-12-31' as DATETIME)
+        WHEN dbt_valid_to is NULL THEN CAST('9999-12-31' as TIMESTAMP)
         ELSE dbt_valid_to
         END AS ValidTo,
         CASE 
@@ -35,8 +35,8 @@ with reviews as (
     -- i believe these left joins get converted into inner joins
     LEFT JOIN {{ ref("DimBusiness")}} db1 on dr1.BusinessID=db1.BusinessSourceKey 
     LEFT JOIN {{ ref("DimUser")}} du1 on dr1.UserID=du1.UserSourceKey
-    WHERE (dr1.insertedat BETWEEN db1.ValidFrom and db1.ValidTo) and
-    (dr1.insertedat BETWEEN du1.ValidFrom and du1.ValidTo)
+    WHERE (dr1.insertedat >= db1.ValidFrom and dr1.insertedat < db1.ValidTo) and
+    (dr1.insertedat >= du1.ValidFrom and dr1.insertedat < du1.ValidTo)
     -- this permits using WH surrogate key
     -- i could do a union after if desired to keep all of the reviews
     -- in the small chance that it doesn't correspond to a business 

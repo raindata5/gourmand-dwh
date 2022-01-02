@@ -1,7 +1,7 @@
 {% snapshot snap_dimbusinesscategory %}
 {{
     config(
-        target_database='GourmandDWH',
+        target_database='gourmanddwh',
         target_schema='Snapshots',
         unique_key='CategoryID',
 
@@ -11,5 +11,5 @@
     )
 }}
 SELECT * 
-from {{ source('dbo', 'BusinessCategory') }}
+from {{ source('public2', 'businesscategory') }}
 {% endsnapshot %}

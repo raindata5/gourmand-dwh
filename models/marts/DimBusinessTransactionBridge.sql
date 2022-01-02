@@ -6,7 +6,7 @@ with bdg1 as (
         sbdg.TransactionID,
         dbt_valid_from ValidFrom,
         CASE 
-        WHEN dbt_valid_to is NULL THEN CAST('9999-12-31' as DATETIME)
+        WHEN dbt_valid_to is NULL THEN CAST('9999-12-31' as TIMESTAMP)
         ELSE dbt_valid_to
         END AS ValidTo,
         CASE 
@@ -18,9 +18,9 @@ with bdg1 as (
     INNER JOIN {{ref("DimBusiness")}} db1 on sbdg.BusinessID=db1.BusinessSourceKey
     INNER JOIN {{ref("DimTransactionType")}} dtt1 on sbdg.TransactionID=dtt1.TransactionSourceKey
     WHERE 
-        (sbdg.dbt_valid_from < db1.ValidTo and coalesce(sbdg.dbt_valid_to, CAST('9999-12-31' as DATETIME)) > db1.ValidFrom)
+        (sbdg.dbt_valid_from < db1.ValidTo and coalesce(sbdg.dbt_valid_to, CAST('9999-12-31' as TIMESTAMP)) > db1.ValidFrom)
         AND
-        (sbdg.dbt_valid_from < dtt1.ValidTo and coalesce(sbdg.dbt_valid_to, CAST('9999-12-31' as DATETIME)) > dtt1.ValidFrom)
+        (sbdg.dbt_valid_from < dtt1.ValidTo and coalesce(sbdg.dbt_valid_to, CAST('9999-12-31' as TIMESTAMP)) > dtt1.ValidFrom)
 
 
 

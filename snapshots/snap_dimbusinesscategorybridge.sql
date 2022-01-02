@@ -1,7 +1,7 @@
 {% snapshot snap_businesscategorybridge %}
 {{
     config(
-        target_database='GourmandDWH',
+        target_database='gourmanddwh',
         target_schema='Snapshots',
         unique_key='SnapshotCompKey',
 
@@ -10,6 +10,6 @@
         invalidate_hard_deletes=True
     )
 }}
-SELECT * from {{ source('dbo', 'BusinessCategoryBridge') }}
+SELECT * from {{ source('public2', 'businesscategorybridge') }}
 
 {% endsnapshot %}

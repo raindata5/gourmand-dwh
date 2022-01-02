@@ -19,7 +19,7 @@ with businesses as (
         b.DistanceToCounty,
         dbt_valid_from ValidFrom,
         CASE 
-        WHEN dbt_valid_to is NULL THEN CAST('9999-12-31' as DATETIME)
+        WHEN dbt_valid_to is NULL THEN CAST('9999-12-31' as TIMESTAMP)
         ELSE dbt_valid_to
         END AS ValidTo,
         CASE 
@@ -27,7 +27,7 @@ with businesses as (
         ELSE 0
         END AS is_current
     from {{ref("snap_business")}} b
-    LEFT JOIN {{source("dbo","PaymentLevel")}} pl on b.PaymentLevelID=pl.PaymentLevelID
+    LEFT JOIN {{source("public2","paymentlevel")}} pl on b.PaymentLevelID=pl.PaymentLevelID
 )
 
 select * from businesses

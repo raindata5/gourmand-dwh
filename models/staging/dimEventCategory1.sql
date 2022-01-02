@@ -1,6 +1,6 @@
 with event_cats as (
     SELECT
     *
-    FROM {{source("dbo", "EventCategory")}}
+    FROM {{source("public2", "eventcategory")}}
 )
 select * from event_cats

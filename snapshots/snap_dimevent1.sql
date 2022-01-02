@@ -1,7 +1,7 @@
 {% snapshot snap_event %}
 {{
     config(
-        target_database='GourmandDWH',
+        target_database='gourmanddwh',
         target_schema='Snapshots',
         unique_key='EventID',
         strategy='timestamp',
@@ -9,6 +9,6 @@
         invalidate_hard_deletes=True
     )
 }}
-SELECT * from {{ source('dbo', 'Event') }}
+SELECT * from {{ source('public2', 'event') }}
 
 {% endsnapshot %}

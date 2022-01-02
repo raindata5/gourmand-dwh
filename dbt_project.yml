@@ -2,12 +2,12 @@
 # Name your project! Project names should contain only lowercase characters
 # and underscores. A good package name should reflect your organization's
 # name or the intended use of these models
-name: 'gourmand_dwh'
+name: gourmand_dwh
 version: '1.0.0'
 config-version: 2
 
 # This setting configures which "profile" dbt uses for this project.
-profile: 'gourmand_dwh'
+profile: gourmand_dwh
 
 # These configurations specify where dbt should look for different types of files.
 # The `source-paths` config, for example, states that models in this project can be
@@ -36,12 +36,12 @@ models:
     # Config indicated by + and applies to all files under models/example/
     marts:
       materialized: table
-      +schema: Production
+      +schema: production
     # intermediate:
     #   materialized: view
     #   +schema: Int
     staging:
-      +schema: Staging
+      +schema: staging
       materialized: view
 
 

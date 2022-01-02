@@ -1,7 +1,7 @@
 {% snapshot snap_review %}
 {{
     config(
-        target_database='GourmandDWH',
+        target_database='gourmanddwh',
         target_schema='Snapshots',
         unique_key='ReviewID',
 
@@ -11,6 +11,6 @@
     )
 }}
 SELECT * 
-from {{ source('dbo', 'Review') }}
+from {{ source('public2', 'review') }}
 
 {% endsnapshot %}

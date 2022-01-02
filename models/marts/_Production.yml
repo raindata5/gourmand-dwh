@@ -77,7 +77,7 @@ models:
   - name: DimDate
     description: ...
     columns:
-      - name: TheDate
+      - name: TheDateid
         description: The date incremented by one in each row
         tests:
           - unique
