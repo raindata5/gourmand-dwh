@@ -31,7 +31,7 @@ models:
         tests:
           - relationships:
               to: ref('DimBusiness')
-              field: BusinessKey
+              field: BusinessSourceKey
   - name: DimUser
     description: ...
     columns:
