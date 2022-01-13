@@ -38,7 +38,11 @@ sources:
           
         - name: businessholding
           description: ...
-          
+          columns:
+            - name: IncrementalCompKey
+              description: The unique key for our incremental model
+              tests:
+                - unique
         - name: businesstransactionbridge
           description: ...
           columns:
