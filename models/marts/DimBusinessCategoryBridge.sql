@@ -5,18 +5,18 @@ with bdg1 as (
         dbc1.BusinessCategoryKey,
         sbdg.BusinessID,
         sbdg.CategoryID,
-        ValidFrom,
+        sbdg.ValidFrom,
         -- dbt_valid_from ValidFrom,
         -- CASE 
         -- WHEN dbt_valid_to is NULL THEN CAST('9999-12-31' as TIMESTAMP)
         -- ELSE dbt_valid_to
         -- END AS ValidTo,
         CASE
-        WHEN ValidTo is NULL THEN CAST('9999-12-31' as TIMESTAMP)
-        ELSE ValidTo
+        WHEN sbdg.ValidTo is NULL THEN CAST('9999-12-31' as TIMESTAMP)
+        ELSE sbdg.ValidTo
         END AS ValidTo,
         CASE 
-        WHEN dbt_valid_to = CAST('9999-12-31' as TIMESTAMP) THEN 1
+        WHEN sbdg.ValidTo = CAST('9999-12-31' as TIMESTAMP) THEN 1
         ELSE 0
         END AS is_current
 
@@ -25,9 +25,9 @@ with bdg1 as (
     INNER JOIN {{ref("DimBusinessCategory")}} dbc1 on sbdg.CategoryID=dbc1.CategorySourceKey
     -- to first make sure the business was valid during the time
   WHERE 
-    (sbdg.dbt_valid_from < db1.ValidTo and sbdg.dbt_valid_to > db1.ValidFrom)
+    (sbdg.ValidFrom < db1.ValidTo and sbdg.ValidTo > db1.ValidFrom)
     AND
-    (sbdg.dbt_valid_from < dbc1.ValidTo and sbdg.dbt_valid_to > dbc1.ValidFrom)
+    (sbdg.ValidFrom < dbc1.ValidTo and sbdg.ValidTo > dbc1.ValidFrom)
 
 
 

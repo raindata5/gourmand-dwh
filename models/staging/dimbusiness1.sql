@@ -17,7 +17,7 @@ with businesses as (
         b.BusinessURL,
         b.is_closed,
         b.DistanceToCounty,
-        LastEditedWhen ValidFrom,
+        b.LastEditedWhen ValidFrom,
         -- dbt_valid_from ValidFrom,
         -- CASE 
         -- WHEN dbt_valid_to is NULL THEN CAST('9999-12-31' as TIMESTAMP)

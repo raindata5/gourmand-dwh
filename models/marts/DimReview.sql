@@ -22,15 +22,15 @@ with reviews as (
         dr1.InsertedAt,
         du1.UserKey,
         db1.BusinessKey,
-        LastEditedWhen ValidFrom,
+        InsertedAt ValidFrom,
         -- dbt_valid_from ValidFrom,
         -- CASE 
         -- WHEN dbt_valid_to is NULL THEN CAST('9999-12-31' as TIMESTAMP)
         -- ELSE dbt_valid_to
         -- END AS ValidTo,
         CASE
-        WHEN ValidTo is NULL THEN CAST('9999-12-31' as TIMESTAMP)
-        ELSE ValidTo
+        WHEN dr1.ValidTo is NULL THEN CAST('9999-12-31' as TIMESTAMP)
+        ELSE dr1.ValidTo
         END AS ValidTo,
         CASE 
         WHEN dbt_valid_to is NULL THEN 1
