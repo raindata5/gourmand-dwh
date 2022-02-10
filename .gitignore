@@ -2,3 +2,6 @@ dbt-env/
 target/
 dbt_modules/
 logs/
+olap-db-venv/
+*.txt
+*.conf

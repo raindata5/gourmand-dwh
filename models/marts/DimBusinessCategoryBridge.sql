@@ -5,10 +5,15 @@ with bdg1 as (
         dbc1.BusinessCategoryKey,
         sbdg.BusinessID,
         sbdg.CategoryID,
-        dbt_valid_from ValidFrom,
-        CASE 
-        WHEN dbt_valid_to is NULL THEN CAST('9999-12-31' as TIMESTAMP)
-        ELSE dbt_valid_to
+        ValidFrom,
+        -- dbt_valid_from ValidFrom,
+        -- CASE 
+        -- WHEN dbt_valid_to is NULL THEN CAST('9999-12-31' as TIMESTAMP)
+        -- ELSE dbt_valid_to
+        -- END AS ValidTo,
+        CASE
+        WHEN ValidTo is NULL THEN CAST('9999-12-31' as TIMESTAMP)
+        ELSE ValidTo
         END AS ValidTo,
         CASE 
         WHEN dbt_valid_to = CAST('9999-12-31' as TIMESTAMP) THEN 1
